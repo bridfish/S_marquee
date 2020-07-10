@@ -46,16 +46,15 @@ class _SmarqueeWidgetState extends State<SmarqueeWidget> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    print("shuaishuai11111");
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       startTimer();
-      print("shuaishuai");
     });
   }
 
   void startTimer() {
     _smarqueeTimer = Timer.periodic(Duration(microseconds: 16), (timer) {
       final distance = _scrollController.offset ?? 0;
+      if(_scrollController.hasClients)
       _scrollController.jumpTo(distance + (1 / SmarqueeSpeed.NORMAL_SPEED) * widget.speedRate);
     });
   }
